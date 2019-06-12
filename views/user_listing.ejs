@@ -1,0 +1,29 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>User List</h2>
+  <p></p>
+  <table  class="table table-bordered">
+  <% for(var i=0; i < data.length; i++) { %>
+     <tr>
+       <td><%= data[i].id %></td>
+       <td><%= data[i].email %></td>
+       <td> <a href="/">Edit</a> </td>
+     </tr>
+  <% } %>
+  </table>
+
+</div>
+
+</body>
+</html>
