@@ -45,7 +45,14 @@ function user_data(req,res) {
   console.log(data);
 }
 
+function user_edit_submited(req,res) {
+  var data = req.body;
+  var id = req.params.id;
+  console.log(id);
+}
+
 module.exports.detail = detail;
 module.exports.logout = logout;
 module.exports.userdata = getUserData;
 module.exports.user_edit = user_data;
+module.exports.useredit = user_edit_submited;

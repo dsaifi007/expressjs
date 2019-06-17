@@ -11,10 +11,15 @@ router.get('/user/login', checkUserLoggedin,function(req, res) {
 });
 router.post('/token-check', getTokenFromHeader,users.user_edit);
 
+
+
 router.get('/dashboard',checkUserSessionNull, function(req, res) {
   res.render('dashboard');
 });
 router.get('/user/detail/:id',sessionLoggedout,users.detail);
+router.get('/user/edit/:id',checkUserLoggedin,users.useredit);
+
+
 router.get('/logout',users.logout);
 router.post('/user/form-submit',users.userdata);
 
@@ -41,6 +46,7 @@ function checkUserSessionNull(req,res,next) {
 
 function getTokenFromHeader(req,res,next) {
       var data = req.body;
+      console.log(req.acceptedLanguages);
       //console.log(req.headers['content-type']);
       if(req.headers['content-type'] != "application/json"){
         return res.json({"status":false,"message":"content type is not set"})
