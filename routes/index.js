@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var users = require('./users');
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
@@ -22,6 +23,8 @@ router.get('/user/edit/:id',checkUserLoggedin,users.useredit);
 
 router.get('/logout',users.logout);
 router.post('/user/form-submit',users.userdata);
+
+router.get('/basic/authentication',basicAuthentication,users.basicAuth);
 
 function sessionLoggedout(req,res,next) {
   if(!req.session.loggedin){
@@ -56,4 +59,16 @@ function getTokenFromHeader(req,res,next) {
      }
       next();
 }
+
+// This function is used for the all the API they will use publicaly
+function  basicAuthentication(req,res,next){
+      console.log(req.headers);
+        if(req.get('Authorization').split(" ")[1] == "YWRtaW46MTIzNDU2Nzg="){
+            next();
+        }else{
+          return res.json({"error":401,"message":"Unauthenticated"});
+        }
+}
+
+
 module.exports = router;

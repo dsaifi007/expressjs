@@ -50,9 +50,12 @@ function user_edit_submited(req,res) {
   var id = req.params.id;
   console.log(id);
 }
-
+function basicAuthentication(req,res,next) {
+  console.log(req.body);
+}
 module.exports.detail = detail;
 module.exports.logout = logout;
 module.exports.userdata = getUserData;
 module.exports.user_edit = user_data;
+module.exports.basicAuth = basicAuthentication;
 module.exports.useredit = user_edit_submited;
