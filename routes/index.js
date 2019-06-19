@@ -24,7 +24,7 @@ router.get('/user/edit/:id',checkUserLoggedin,users.useredit);
 router.get('/logout',users.logout);
 router.post('/user/form-submit',users.userdata);
 
-router.get('/basic/authentication',basicAuthentication,users.basicAuth);
+router.post('/basic/authentication',basicAuthentication,users.basicAuth);
 
 function sessionLoggedout(req,res,next) {
   if(!req.session.loggedin){
@@ -62,12 +62,15 @@ function getTokenFromHeader(req,res,next) {
 
 // This function is used for the all the API they will use publicaly
 function  basicAuthentication(req,res,next){
-      console.log(req.headers);
-        if(req.get('Authorization').split(" ")[1] == "YWRtaW46MTIzNDU2Nzg="){
-            next();
-        }else{
+       //  console.log(req.headers);
+        if(req.get('Authorization').split(" ")[1] != "YWRtaW46MTIzNDU2Nzg="){
           return res.json({"error":401,"message":"Unauthenticated"});
         }
+
+        if(req.get('Content-Type') != "application/json"){
+          return res.json({"error":400,"message":"Content type is not set"});
+        }
+        next();
 }
 
 
