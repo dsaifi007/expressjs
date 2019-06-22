@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var users = require('./users');
 
-/* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express'});
 });
 
 router.get('/user/login', checkUserLoggedin,function(req, res) {
-  res.render('login');
+//console.log("sss  "+req.csrfToken());
+  res.render('login',{ csrftoken:req.csrfToken() } );
+  //console.log("eeee");
+  //console.log("sss  "+req.csrfToken());
 });
 router.post('/token-check', getTokenFromHeader,users.user_edit);
 
@@ -34,7 +36,7 @@ function sessionLoggedout(req,res,next) {
   next();
 }
 function checkUserLoggedin(req,res,next) {
-  console.log(req.session.loggedin);
+  //console.log(req.session.loggedin);
   if(req.session.loggedin == true){
       return res.redirect("/dashboard");
   }
@@ -62,8 +64,8 @@ function getTokenFromHeader(req,res,next) {
 
 // This function is used for the all the API they will use publicaly
 function  basicAuthentication(req,res,next){
-       //  console.log(req.headers);
-        if(req.get('Authorization').split(" ")[1] != "YWRtaW46MTIzNDU2Nzg="){
+        //console.log(req.get('Authorization').split(" ")[1]);
+        if(req.get('Authorization').split(" ")[1] != "YWRtaW46MTIzNDU2Nzgy"){
           return res.json({"error":401,"message":"Unauthenticated"});
         }
 

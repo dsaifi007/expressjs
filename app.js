@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('req-flash');
 var routes = require('./routes/index');
-
+var csrf = require('csurf');
 
 var app = express();
 app.use(cookieParser());
@@ -16,7 +16,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(csrf());
 app.use(flash());
+/* GET home page. */
+var csrfProtection = csrf({ cookie: true });
+var parseForm = bodyParser.urlencoded({ extended: false });
 
 
 // //view engine setup

@@ -5,6 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="">
   <title>Login User</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/stylesheets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -27,9 +28,12 @@
           <div class="col-lg-4 mx-auto">
             <div class="auto-form-wrapper">
               <form action="/user/form-submit" method="POST">
+                 <input type="hidden" name="_csrf" value='<%= csrftoken %>'>
+
                     <% if (typeof error != 'undefined' && error) { %>
                     <div class="alert alert-danger"><%- error %></div>
                     <% } %>
+
                 <div class="form-group">
                   <label class="label">Email</label>
                   <div class="input-group">
