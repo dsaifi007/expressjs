@@ -7,7 +7,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/user/login', checkUserLoggedin,function(req, res) {
-//console.log("sss  "+req.csrfToken());
+  // console.log("sss  "+req.csrfToken());
   res.render('login',{ csrftoken:req.csrfToken() } );
   //console.log("eeee");
   //console.log("sss  "+req.csrfToken());
