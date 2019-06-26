@@ -27,8 +27,8 @@
         <div class="row w-100">
           <div class="col-lg-4 mx-auto">
             <div class="auto-form-wrapper">
-              <form action="/form/form-submit" method="POST">
-                 <input type="hidden" name="_csrf" value='<%= csrftoken %>'>
+              <form action="/user/form-submit" method="POST">
+                
 
                     <% if (typeof error != 'undefined' && error) { %>
                     <div class="alert alert-danger"><%- error %></div>

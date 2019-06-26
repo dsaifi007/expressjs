@@ -5,10 +5,12 @@ var md5 = require('md5');
 
 function getUserData(req,res) {
   var data = req.body;
+
   var a = conn.query("SELECT email FROM users WHERE email= ? AND password= ? ",[data.email,md5(data.password)],function(err,row,data){
     if(err){
       res.json({"error":"query error"});
     }else{
+
       if(row.length>0){
           req.session.email =row[0].email;
           req.session.loggedin = true;
@@ -33,7 +35,7 @@ function detail(req,res) {
     if(err){
       res.json({"error":"query error"});
     }else{
-       //console.log(row[0].email);
+       console.log(row[0].email);
        res.render('user_listing',{data:row});
     }
   });

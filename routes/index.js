@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var users = require('./users');
+var nodemailer = require('nodemailer');
+
+
 
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express'});
@@ -8,7 +11,7 @@ router.get('/', function(req, res) {
 
 router.get('/user/login', checkUserLoggedin,function(req, res) {
   // console.log("sss  "+req.csrfToken());
-  res.render('login',{ csrftoken:req.csrfToken() } );
+  res.render('login');
   //console.log("eeee");
   //console.log("sss  "+req.csrfToken());
 });

@@ -7,36 +7,27 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('req-flash');
 var routes = require('./routes/index');
-var csrf = require('csurf');
+//var csrf = require('csurf');
 
 var app = express();
 
-app.use(cookieParser());
 app.use(session({
     secret: 'secretkey',
     resave: false,
     saveUninitialized: true
 }));
-app.use(csrf({ cookie: true }));
+//app.use(app.router);
+//app.use(csrf({ cookie: true }));
 app.use(flash());
 
 /* GET home page. */
-var csrfProtection = csrf({ cookie: true });
-var parseForm = bodyParser.urlencoded({ extended: false });
+//var csrfProtection = csrf({ cookie: true });
+//var parseForm = bodyParser.urlencoded({ extended: false });
 
 // //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-// ----------------------------------------------------------------------------------
-app.get("/form",function(req, res) {
-  res.render('login',{ csrftoken:req.csrfToken() } );
-});
-app.post('/form/form-submit' ,parseForm, csrfProtection, function(req, res) {
-  res.send('Form is being processed');
-});
-// ----------------------------------------------------------------------------------
 
 //app.set('views', path.join(__dirname, 'views'));
 
@@ -49,10 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 //app.use('/users', users);
-app.use(function(request,response,next){
-    app.locals._token = request.csrfToken();
-    next();
-})
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -88,16 +75,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });*/
-});
-
-
-// error handler fir the CSRF token
-app.use(function (err, req, res, next) {
-  if (err.code !== 'EBADCSRFTOKEN') return next(err)
-
-  // Handle CSRF token errors here
-  res.status(403);
-  res.send('form tampered with');
 });
 
 
