@@ -18,6 +18,10 @@ router.get('/user/login', checkUserLoggedin,function(req, res) {
 });
 router.post('/token-check', getTokenFromHeader,users.user_edit);
 
+router.get('/user/register',function(req, res){
+  //console.log("Sss");
+  res.render('register');
+});
 //router.get('/drive/files', drive.listFiles);
 
 router.get('/dashboard',checkUserSessionNull, function(req, res) {
@@ -72,7 +76,6 @@ function  basicAuthentication(req,res,next){
         if(req.get('Authorization').split(" ")[1] != "YWRtaW46MTIzNDU2Nzgy"){
           return res.json({"error":401,"message":"Unauthenticated"});
         }
-
         if(req.get('Content-Type') != "application/json"){
           return res.json({"error":400,"message":"Content type is not set"});
         }
