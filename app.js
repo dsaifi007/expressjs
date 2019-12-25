@@ -24,7 +24,7 @@ app.use(flash());
 //var csrfProtection = csrf({ cookie: true });
 //var parseForm = bodyParser.urlencoded({ extended: false });
 
-// //view engine setup
+// //view engine setup by ----
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
