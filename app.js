@@ -1,4 +1,4 @@
-var express = require('express');
+o var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
+//// in this case we are using the sesssion
 app.use(session({
     secret: 'secretkey',
     resave: false,
