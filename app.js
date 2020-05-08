@@ -24,8 +24,6 @@ app.use(flash());
 //var csrfProtection = csrf({ cookie: true });
 //var parseForm = bodyParser.urlencoded({ extended: false });
 
-// I am just testing the clone cmd
-
 // //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
